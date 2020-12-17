@@ -24,6 +24,7 @@ function Object:new(layer, name, type, x, y, width, height, gid, prop)
     obj.properties = prop or {} -- Properties set by tiled.
     obj.polygon = nil           -- Polygon points. Set by the Loader if defined in Tiled.
     obj.polyline = nil          -- Polyline points. Set by the Loader if defined in Tiled.
+	obj.texture = nil
     
     -- drawInfo stores values needed to actually draw the object. You can either set these yourself
     -- or use updateDrawInfo to do it automatically.
@@ -192,19 +193,20 @@ function Object:draw(x, y, r, g, b, a)
 
     -- Map is orthogonal. Draw a rectangle.
     else
-        love.graphics.setColor(r, g, b, a/5)
-        love.graphics.rectangle("fill", unpack(di))
+        --love.graphics.setColor(r, g, b, a/5)
+        --love.graphics.rectangle("fill", unpack(di))
             
-        love.graphics.setColor(0, 0, 0, a)
-        love.graphics.push()
-        love.graphics.translate(1,1)
-        love.graphics.rectangle("line", unpack(di))
-        love.graphics.print(self.name, di.x, di.y-20)
-        love.graphics.pop()
+        --love.graphics.setColor(0, 0, 0, a)
+        --love.graphics.push()
+        --love.graphics.translate(1,1)
+        --love.graphics.rectangle("line", unpack(di))
+        --love.graphics.print(self.name, di.x, di.y-20)
+        --love.graphics.pop()
             
-        love.graphics.setColor(r,g,b,a)
-        love.graphics.rectangle("line", unpack(di))
-        love.graphics.print(self.name, di.x, di.y-20)
+        --love.graphics.setColor(r,g,b,a)
+        --love.graphics.rectangle("line", unpack(di))
+        --love.graphics.print(self.name, di.x, di.y-20)
+		love.graphics.draw(self.texture,di.x,di.y)
     end
 end
 

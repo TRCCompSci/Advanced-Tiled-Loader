@@ -120,9 +120,9 @@ function TileLayer:draw()
     
         -- Bind the sprite batches
         if useSpriteBatch then 
-            for k, batch in pairs(self._batches) do
-                batch:bind()
-            end
+            --for k, batch in pairs(self._batches) do
+              --  batch:bind()
+            --end
         end
     
         -- Orthogonal tiles
@@ -157,7 +157,7 @@ function TileLayer:draw()
                     if not self._batches[tile.tileset] then 
                         self._batches[tile.tileset] = love.graphics.newSpriteBatch(
                                                         tile.tileset.image, map.width * map.height)
-                        self._batches[tile.tileset]:bind()
+                        --self._batches[tile.tileset]:bind()
                     end
                     -- Add the quad to the spritebatch
                     self._batches[tile.tileset]:add(tile.quad, drawX + halfW, 
@@ -240,7 +240,7 @@ function TileLayer:draw()
                                                                             tile.tileset.image, 
                                                                             map.width * map.height)
                                         -- Bind the sprite batch
-                                        self._batches[tile.tileset]:bind()
+                                        --self._batches[tile.tileset]:bind()
                                     end
                                     -- Add the tile to the sprite batch.
                                     self._batches[tile.tileset]:add(tile.quad, drawX + halfW + 
@@ -277,7 +277,7 @@ function TileLayer:draw()
         -- Unbind the sprite batches
          if useSpriteBatch then 
             for k, batch in pairs(self._batches) do
-                batch:unbind()
+                --batch:unbind()
             end
         end
         
