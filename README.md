@@ -19,6 +19,16 @@ Supported features include:
 Example files can be found at https://github.com/Kadoba/Advanced-Tiled-Loader-Examples
 
 ----------------------------------------------------------------------------------------------------
+# TRCCompSci
+DONE:
+* Removed commands no longer supported.
+* You can give an object a texture instead of just a black rectangle.
+
+TO DO:
+* I will try to add a camera function to focus the map on a specific object.
+* I will add some examples to show moving objects within the map.
+
+----------------------------------------------------------------------------------------------------
 # Quick Example
   
 ```lua     
