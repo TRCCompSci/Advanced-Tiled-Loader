@@ -24,7 +24,7 @@ Example files can be found at https://github.com/Kadoba/Advanced-Tiled-Loader-Ex
 ```lua     
 
 -- Gets the loader
-loader = require("AdvTiledLoader/loader.lua")
+loader = require("Advanced-Tiled-Loader/loader.lua")
 
  -- Path to the tmx files. The file structure must be similar to how they are saved in Tiled
 loader.path = "maps/"
