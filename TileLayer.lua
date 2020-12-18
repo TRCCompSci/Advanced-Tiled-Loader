@@ -141,6 +141,7 @@ function TileLayer:draw()
                 drawX = drawX - map.offsetX - self.offsetX
                 drawY = drawY - map.offsetY - self.offsetY
                 
+				--print(map.offsetX.." "..map.offsetY)
                 -- Get the flipped tiles
                 if self._flippedTiles(x,y) then
                     rot =  (self._flippedTiles(x,y) % 2) == 1 and true or false

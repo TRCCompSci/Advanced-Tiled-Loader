@@ -10,6 +10,7 @@ local TileSet = require( TILED_LOADER_PATH .. "TileSet")
 local TileLayer = require( TILED_LOADER_PATH .. "TileLayer")
 local Object = require( TILED_LOADER_PATH .. "Object")
 local ObjectLayer = require( TILED_LOADER_PATH .. "ObjectLayer")
+local Camera = require( TILED_LOADER_PATH .. "Camera")
 
 -- Localize some functions so they are faster
 local love = love
@@ -63,6 +64,7 @@ function Map:new(name, width, height, tileWidth, tileHeight, orientation, path, 
     map._previousUseSpriteBatch = false -- The previous useSpiteBatch.
     map._tileClipboard  =   nil         -- The value that stored for tile copying and pasting.
     map._directory = path               -- The directory the map is in
+	map.camera =  Camera:new(nil,0,0,love.graphics.getWidth(),love.graphics.getHeight())
     
     -- Return the new map
     return map
@@ -138,14 +140,22 @@ end
 
 ---------------------------------------------------------------------------------------------------
 -- Forces the map to redraw the sprite batches.
+-- updates the camera and sets the new map offset and the drawrange
 function Map:forceRedraw()
     self._forceRedraw = true
+	self.camera:update()
+	self.offsetX = self.camera.viewX
+	self.offsetY = self.camera.viewY
+	map:autoDrawRange(map.camera.x, map.camera.y,0,0)
 end
 
 ---------------------------------------------------------------------------------------------------
 -- Performs a callback on all map layers.
 local layer
 function Map:callback(cb, ...)
+	--self.offsetX = map.camera.viewX
+	--self.offsetY = map.camera.viewY
+	--print(self.offsetX .. " " .. self.offsetY)
     if cb == "draw" then self:_updateTileRange() end
     for i = 1, #self.layerOrder do
         layer = self.layerOrder[i]
@@ -263,7 +273,7 @@ function Map:_updateTileRange()
             
             -- Apply the offset
             x1 = x1 - self.offsetX - layer.offsetX
-            y1 = y1 - self.offsetY - layer.offsetY
+			y1 = y1 - self.offsetY - layer.offsetY
         
             -- Calculate the _tileRange for orthogonal tiles
             if self.orientation == "orthogonal" then
@@ -284,7 +294,7 @@ function Map:_updateTileRange()
             
                 else
                     -- If the drawing range isn't defined then we draw all the tiles
-                    x1, y1, x2, y2 = 0, 0, self.width-1, self.height-1
+                    x1, y1, x2, y2 = 0 , 0 , self.width-1 , self.height-1 
                 end
             
             -- Calculate the _tileRange for isometric tiles.
