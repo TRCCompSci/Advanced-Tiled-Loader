@@ -153,9 +153,6 @@ end
 -- Performs a callback on all map layers.
 local layer
 function Map:callback(cb, ...)
-	--self.offsetX = map.camera.viewX
-	--self.offsetY = map.camera.viewY
-	--print(self.offsetX .. " " .. self.offsetY)
     if cb == "draw" then self:_updateTileRange() end
     for i = 1, #self.layerOrder do
         layer = self.layerOrder[i]
