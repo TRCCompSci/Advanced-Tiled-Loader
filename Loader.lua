@@ -63,12 +63,12 @@ function Loader.load(tofile)
     fullpath = string.gsub(fullpath, "[^/^\\]+$", "")
     
     -- Find out if the file is in the game or save directory
-    if love.filesystem.exists(fullpath .. filename) then
-    elseif love.filesystem.exists(fullpath .. filename .. ".tmx") then
+    if love.filesystem.getInfo(fullpath .. filename) then
+    elseif love.filesystem.getInfo(fullpath .. filename .. ".tmx") then
         filename = filename .. ".tmx"
-    elseif love.filesystem.exists(Loader.saveDirectory.."/"..filename) then
+    elseif love.filesystem.getInfo(Loader.saveDirectory.."/"..filename) then
         fullpath = Loader.saveDirectory .. "/"
-    elseif love.filesystem.exists(Loader.saveDirectory .. "/" .. filename .. ".tmx") then
+    elseif love.filesystem.getInfo(Loader.saveDirectory .. "/" .. filename .. ".tmx") then
         fullpath = Loader.saveDirectory .. "/"
         filename = filename .. ".tmx"
     else
