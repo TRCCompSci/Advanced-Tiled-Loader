@@ -23,12 +23,73 @@ Example files can be found at https://github.com/Kadoba/Advanced-Tiled-Loader-Ex
 DONE:
 * Removed commands no longer supported.
 * You can give an object a texture instead of just a black rectangle.
-
-TO DO:
-* I will try to add a camera function to focus the map on a specific object.
+* Added a camera class and object to map.
+* You can provide an object for the camera to follow.
+* Map centered on camera object.
 * I will add some examples to show moving objects within the map.
 
 ----------------------------------------------------------------------------------------------------
+# Using the Camera
+
+```lua
+-- Find the player object in your map, give it a texture and set the camera to this object
+-- The camera update is to update the x,y and viewport calculations
+-- This could be in love.load() 
+
+for _, layer in pairs(map.layers) do
+    if layer.class == "ObjectLayer" then
+        for _, obj in pairs(layer.objects) do
+	    if obj.name == "Player" then 
+	        print(obj.name)
+		obj.texture = image
+		map.camera.Object=obj
+		map.camera:update()
+	    end
+	end
+   end
+end
+
+-- you will then need to call map.draw() as normal
+```
+
+# Moving the object connected to the camera
+```lua
+-- this can be in the love.update().
+-- difx and dify are used to set the movement for this update.
+-- change will be true if any movement was made.
+
+	local difx = 0
+	local dify = 0
+	change = false
+	
+	if love.keyboard.isDown("up") then 
+		dify=100*dt 
+		change = true
+		end
+	if love.keyboard.isDown("down") then 
+		dify = -100*dt
+		change = true		
+		end
+	if love.keyboard.isDown("left") then 
+		difx= 100*dt 
+		change = true
+		end
+	if love.keyboard.isDown("right") then 
+		difx= -100*dt 
+		change = true		
+		end
+	
+	player.x = player.x-difx -- change the x position of the object in the map
+	player.y = player.y-dify -- change the y position of the object in the map
+	
+	if change==true then
+		map:forceRedraw()
+		end
+
+-- if a change has been made to the player objects position
+-- map:forceRedraw() will update the camera and viewport.
+```
+
 # Quick Example
   
 ```lua     
