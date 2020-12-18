@@ -19,12 +19,22 @@ Supported features include:
 Example files can be found at https://github.com/Kadoba/Advanced-Tiled-Loader-Examples
 
 ----------------------------------------------------------------------------------------------------
+# TRCCompSci
+DONE:
+* Removed commands no longer supported.
+* You can give an object a texture instead of just a black rectangle.
+
+TO DO:
+* I will try to add a camera function to focus the map on a specific object.
+* I will add some examples to show moving objects within the map.
+
+----------------------------------------------------------------------------------------------------
 # Quick Example
   
 ```lua     
 
 -- Gets the loader
-loader = require("AdvTiledLoader/loader.lua")
+loader = require("Advanced-Tiled-Loader/loader.lua")
 
  -- Path to the tmx files. The file structure must be similar to how they are saved in Tiled
 loader.path = "maps/"
